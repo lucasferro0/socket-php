@@ -30,8 +30,10 @@ class FileCommand
             $socketClientManager = new SocketClientManager();
     
             $dataReceived = $socketClientManager->sendData(json_encode($dados));
+
+            $dataReceivedArray = json_decode($dataReceived, true);
     
-            echo $dataReceived;
+            echo $dataReceivedArray['message'];
 
             die;
         }else{
@@ -55,17 +57,14 @@ class FileCommand
     
         $dataReceived = $socketClientManager->sendData(json_encode($dados));
     
-        if ($dataReceived){
-            (new FileManager())->put($fullPathFrom, $dataReceived);
-    
-            echo 'Arquivo obtido com sucesso.';
+        (new FileManager())->put($fullPathFrom, $dataReceived);
 
-            die;
-        }else{
-            echo 'Arquivo não foi obtido.';
+        $dataReceivedArray = json_decode($dataReceived, true);
 
-            die;
-        }
+        echo $dataReceivedArray['message'];
+
+        die;
+        
     }
 
     public function destroy(string $fullPathFrom)
@@ -81,15 +80,9 @@ class FileCommand
         $socketClientManager = new SocketClientManager();
     
         $dataReceived = $socketClientManager->sendData(json_encode($dados));
+
+        $dataReceivedArray = json_decode($dataReceived, true);
     
-        if ($dataReceived){
-            echo 'Arquivo excluído';
-
-            die;
-        }else{
-            echo 'Arquivo não foi excluído';
-
-            die;
-        }
+        echo $dataReceivedArray['message'];
     }
 }
