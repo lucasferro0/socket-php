@@ -1,5 +1,5 @@
 <?php
-namespace SocketPhp\Destiny\SubjectsManager;
+namespace SocketPhp\SubjectsManager;
 
 class FileManager
 {
@@ -14,11 +14,22 @@ class FileManager
 
     public function put(string $path, string $contents): bool
     {
+        if (file_exists(dirname($path))){
+            $file = fopen($path, 'w');
+
+            fwrite($file, $contents);
+
+            return fclose($file); 
+        }
+
+        mkdir(dirname($path));
+
         $file = fopen($path, 'w');
 
-        fwrite($contents, strlen($contents));
+        fwrite($file, $contents);
 
-        return fclose($file);  
+        return fclose($file); 
+
     }
 
     public function append(string $path, $contents): bool
@@ -47,5 +58,10 @@ class FileManager
     public function size(string $path): int
     {
         return filesize($path);
+    }
+
+    public function fileExists(string $path): bool
+    {
+        return file_exists($path);
     }
 }

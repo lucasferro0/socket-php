@@ -1,10 +1,10 @@
 <?php
 namespace SocketPhp\Destiny\Action;
 
-use SocketPhp\Destiny\SubjectsManager\FileManager;
-
 class ActionManager
 {
+    use ActionsTrait;
+
     private string $type;
 
     private string $action;
@@ -13,7 +13,7 @@ class ActionManager
 
     private ?string $contents;
 
-    public function __contruct(string $type, string $action, ?array $data)
+    public function __construct(string $type, string $action, ?array $data)
     {
         $this->type = $type;
 
@@ -29,28 +29,10 @@ class ActionManager
     public function runAction()
     {
         if ($this->type == 'file'){
-            if ($this->action == 'store'){
-                $fileManager = new FileManager();
+            return $this->actionToFile();
 
-                $wasStored = $fileManager->put($this->fullPath, $this->contents);
-
-                return $wasStored;
-
-            }elseif ($this->action == 'show'){
-                $fileManager = new FileManager();
-
-                $contents = $fileManager->get($this->fullPath);
-
-                return $contents;
-            }elseif ($this->action == 'destroy'){
-                $fileManager = new FileManager();
-
-                $wasDeleted = $fileManager->delete($this->fullPath);
-
-                return $wasDeleted;
-            }
         }else{ // folder
-            
+            return $this->actionToFolder();
         }
     }
 }
