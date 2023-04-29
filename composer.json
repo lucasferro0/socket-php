@@ -1,5 +1,5 @@
 {
-    "name": "vendor/socket-php",
+    "name": "socket/socket-php",
     "autoload": {
         "psr-4": {
             "SocketPhp\\": "src/"
