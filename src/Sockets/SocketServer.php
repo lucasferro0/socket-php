@@ -1,7 +1,9 @@
 <?php
 declare(strict_types=1);
 
-// Queremos que o PHP reporte apenas erros graves, estamos explicitamente ignorando warnings aqui.
+namespace SocketPhp\Sockets;
+
+// Ignorando warnings aqui.
 // Warnings que, por sinal, acontecem bastante ao se trabalhar com sockets.
 error_reporting(E_ERROR | E_PARSE);
 
