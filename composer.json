@@ -1,0 +1,15 @@
+{
+    "name": "dell/socket-php",
+    "autoload": {
+        "psr-4": {
+            "SocketPhp\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "lucasferro0",
+            "email": "lucasferrobrandao@hotmail.com"
+        }
+    ],
+    "require": {}
+}
