@@ -46,67 +46,35 @@ error_reporting(E_ERROR | E_PARSE);
  */
 class SocketServerManager
 {
-    /**
-     * @var resource|Socket $socket
-     */
-    private $socket;
-
-    private bool $status;
-
-    public string $receivedData = '';
-
-    public function create(string $ip, int $port): SocketServerManager
-    {
-        $this->socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
-
-        socket_bind($this->socket, $ip, $port);
-
-        socket_listen($this->socket, 100);
-
-        return $this;
-    }
-
     public function runServer()
     {
         echo 'SERVER DO PROJETO SERVER RODANDO ...';
 
-        while(true){
-            $connection = socket_accept($this->socket);
-        
-            if ($connection){
-                echo 'CONEXÃO ESTABELECIDA.' . PHP_EOL . PHP_EOL;
-        
-                while($buffer = socket_read($connection, 100000000)){
-                    if ($buffer != ''){
-                        $detinyChoicer = new DestinyChooser($buffer);
+        $socketServer = stream_socket_server("tcp://0.0.0.0:8000", $errno, $errstr);
 
-                        var_dump($buffer);
+        if (!$socketServer) {
+            echo "$errstr ($errno)<br />\n";
 
-                        $result = $detinyChoicer->sendToDestiny();
+        }else {
 
-                        $socketClientManager = new SocketClientManager();
+            if ($socketServer){
+                while (true){
+                    $conn = stream_socket_accept($socketServer);
 
-                        $socketClientManager->create('127.0.0.1', 4000);
-
-                        $socketClientManager->connect('127.0.0.1', 1500);
-
-                        $response = [
-                            'success' => true,
-                            'result' => $result
-                        ];
-
-                        $socketClientManager->sendData(json_encode($response));
-        
-                        sleep(10);
+                    if (!$conn){
+                        break;
                     }
+
+                    var_dump(fread($conn, 2048));
+
+                    sleep(10);
+
+                    fwrite($conn, 'La fecha y hora actuales es ' . date('n/j/Y g:i a') . "\n");
+
+                    fclose($conn);
                 }
 
-                socket_close($connection);
-        
-            }else{
-                echo 'AGUARDANDO CONEXÃO.' . PHP_EOL . PHP_EOL;
-        
-                sleep(10);
+                fclose($socketServer);
             }
         }
     }
