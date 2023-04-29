@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace SocketPhp\Sockets;
 
+use Socket;
+
 error_reporting(E_ERROR | E_PARSE);
 
 $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
@@ -40,5 +42,52 @@ if ($socket){
 
             sleep(10);
         }
+    }
+}
+
+/**
+ * Possui o papel de socket client
+ */
+class SocketClientManager
+{
+    /**
+     * @var resource|Socket $socket
+     */
+    private $socket;
+
+    private bool $status;
+
+    public function create(string $ip, int $port): SocketClientManager
+    {
+        $this->socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
+
+        socket_bind($this->socket, $ip, $port);
+
+        return $this;
+    }
+
+    public function connect(string $ip, int $port): SocketClientManager
+    {
+        $connected = socket_connect($this->socket, $ip, $port);
+
+        $this->status = $connected;
+
+        return $this;
+    }
+
+    public function isConnected(): bool
+    {
+        return $this->status;
+    }
+
+    public function sendData(string $data): bool
+    {
+        if (!$this->isConnected()){
+            return false;
+        }
+
+        $sent = socket_send($this->socket, $data, strlen($data), 0);
+
+        return $sent;
     }
 }
