@@ -1,6 +1,7 @@
 <?php
-
 declare(strict_types=1);
+
+namespace SocketPhp\Sockets;
 
 error_reporting(E_ERROR | E_PARSE);
 
