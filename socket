@@ -12,8 +12,8 @@ $commandManager->registerCommand('file:get', 'SocketPhp\Commands\FileCommand@get
 
 $commandManager->registerCommand('file:destroy', 'SocketPhp\Commands\FileCommand@destroy');
 
-$commandManager->registerCommand('folder:make', 'SocketPhp\Commands\FileCommand@make');
+$commandManager->registerCommand('folder:make', 'SocketPhp\Commands\FolderCommand@make');
 
-$commandManager->registerCommand('folder:scan', 'SocketPhp\Commands\FileCommand@scan');
+$commandManager->registerCommand('folder:scan', 'SocketPhp\Commands\FolderCommand@scan');
 
-$commandManager->registerCommand('folder:delete', 'SocketPhp\Commands\FileCommand@delete');
+$commandManager->registerCommand('folder:delete', 'SocketPhp\Commands\FolderCommand@delete');

@@ -52,6 +52,8 @@ class CommandManager
             foreach($reflectionClass->getMethods() as $reflectionMethodObject){
                 $nameMethod = $reflectionMethodObject->getName();
 
+                var_dump($nameMethod);
+
                 if ($nameMethod == $method){
                     $reflectionMethodObject->getParameters();
 

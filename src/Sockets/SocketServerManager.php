@@ -12,7 +12,7 @@ class SocketServerManager
     {
         echo 'SERVER DO PROJETO SERVER RODANDO ...';
 
-        $socketServer = stream_socket_server("tcp://0.0.0.0:8000", $errno, $errstr);
+        $socketServer = stream_socket_server("tcp://127.0.0.1:8000", $errno, $errstr);
 
         if (!$socketServer) {
             echo "$errstr ($errno)<br />\n";
@@ -28,6 +28,8 @@ class SocketServerManager
                     }
 
                     $dataReceived = fread($conn, 2048);
+                    echo PHP_EOL . PHP_EOL . 'DADOS RECEBIDOS DO SOCKET CLIENT' . PHP_EOL . PHP_EOL;
+                    var_dump($dataReceived);
 
                     if ($dataReceived){
                         echo PHP_EOL . 'AÇÃO EXECUTADA' . PHP_EOL;

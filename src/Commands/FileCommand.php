@@ -56,10 +56,10 @@ class FileCommand
         $socketClientManager = new SocketClientManager();
     
         $dataReceived = $socketClientManager->sendData(json_encode($dados));
-    
-        (new FileManager())->put($fullPathFrom, $dataReceived);
 
         $dataReceivedArray = json_decode($dataReceived, true);
+    
+        (new FileManager())->put($fullPathFrom, $dataReceivedArray['data']);
 
         echo $dataReceivedArray['message'];
 
@@ -84,5 +84,7 @@ class FileCommand
         $dataReceivedArray = json_decode($dataReceived, true);
     
         echo $dataReceivedArray['message'];
+
+        die;
     }
 }

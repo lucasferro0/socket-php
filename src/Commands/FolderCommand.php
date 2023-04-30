@@ -19,15 +19,11 @@ class FolderCommand
     
         $dataReceived = $socketClientManager->sendData(json_encode($dados));
     
-        if ($dataReceived){
-            echo 'Pasta criada.';
+        $dataReceivedArray = json_decode($dataReceived, true);
+    
+        echo $dataReceivedArray['message'];
 
-            die;
-        }else{
-            echo 'Pasta não foi criada';
-
-            die;
-        }
+        die;
     }
 
     public function scan(string $fullPathFrom)
@@ -44,7 +40,9 @@ class FolderCommand
     
         $dataReceived = $socketClientManager->sendData(json_encode($dados));
     
-        echo $dataReceived;
+        $dataReceivedArray = json_decode($dataReceived, true);
+    
+        var_dump($dataReceivedArray['data']);
 
         die;
     }
@@ -63,7 +61,9 @@ class FolderCommand
     
         $dataReceived = $socketClientManager->sendData(json_encode($dados));
     
-        echo $dataReceived;
+        $dataReceivedArray = json_decode($dataReceived, true);
+    
+        echo $dataReceivedArray['message'];
 
         die;
     }
