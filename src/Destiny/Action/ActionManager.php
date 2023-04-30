@@ -30,9 +30,8 @@ class ActionManager
     {
         if ($this->type == 'file'){
             return $this->actionToFile();
-
-        }else{ // folder
-            return $this->actionToFolder();
         }
+
+        return $this->actionToFolder();
     }
 }

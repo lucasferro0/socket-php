@@ -39,10 +39,6 @@ class DestinyChooser
 
     public function sendToDestiny()
     {
-        if ($this->subject == 'file'){
-            return (new ActionManager($this->subject, $this->action, $this->data))->runAction();
-        }
-
         return (new ActionManager($this->subject, $this->action, $this->data))->runAction();
     }
 }
