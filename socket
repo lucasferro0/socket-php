@@ -1,0 +1,19 @@
+<?php
+
+require 'vendor/autoload.php';
+
+use SocketPhp\Commands\CommandManager;
+
+$commandManager = new CommandManager($argv);
+
+$commandManager->registerCommand('file:store', 'SocketPhp\Commands\FileCommand@store');
+
+$commandManager->registerCommand('file:get', 'SocketPhp\Commands\FileCommand@get');
+
+$commandManager->registerCommand('file:destroy', 'SocketPhp\Commands\FileCommand@destroy');
+
+$commandManager->registerCommand('folder:make', 'SocketPhp\Commands\FolderCommand@make');
+
+$commandManager->registerCommand('folder:scan', 'SocketPhp\Commands\FolderCommand@scan');
+
+$commandManager->registerCommand('folder:delete', 'SocketPhp\Commands\FolderCommand@delete');

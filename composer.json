@@ -1,5 +1,5 @@
 {
-    "name": "dell/socket-php",
+    "name": "socket/socket-php",
     "autoload": {
         "psr-4": {
             "SocketPhp\\": "src/"
@@ -11,5 +11,7 @@
             "email": "lucasferrobrandao@hotmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "php": "^8.1"
+    }
 }
