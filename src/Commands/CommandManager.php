@@ -13,9 +13,9 @@ class CommandManager
 
     private ?string $fullPathTo; 
 
-    public function __construct(array $argv)
+    public function __construct()
     {
-        $this->argv = $argv;
+        $this->argv = $_SERVER['argv'];
 
         $this->prepareCommands();
     }

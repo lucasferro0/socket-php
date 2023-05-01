@@ -4,7 +4,7 @@ require 'vendor/autoload.php';
 
 use SocketPhp\Commands\CommandManager;
 
-$commandManager = new CommandManager($argv);
+$commandManager = new CommandManager();
 
 $commandManager->registerCommand('file:store', 'SocketPhp\Commands\FileCommand@store');
 
